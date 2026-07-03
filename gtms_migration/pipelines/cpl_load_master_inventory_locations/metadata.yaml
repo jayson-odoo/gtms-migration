@@ -1,0 +1,39 @@
+blocks:
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - cpl_clean_inventory_locations
+  name: cpl_load_inventory_locations_sheet
+  status: not_executed
+  type: data_loader
+  upstream_blocks: []
+  uuid: cpl_load_inventory_locations_sheet
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - cpl_upsert_inventory_locations
+  name: cpl_clean_inventory_locations
+  status: not_executed
+  type: transformer
+  upstream_blocks:
+  - cpl_load_inventory_locations_sheet
+  uuid: cpl_clean_inventory_locations
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - cpl_validate_inventory_locations
+  name: cpl_upsert_inventory_locations
+  status: not_executed
+  type: data_exporter
+  upstream_blocks:
+  - cpl_clean_inventory_locations
+  uuid: cpl_upsert_inventory_locations
+- all_upstream_blocks_executed: true
+  downstream_blocks: []
+  name: cpl_validate_inventory_locations
+  status: not_executed
+  type: custom
+  upstream_blocks:
+  - cpl_upsert_inventory_locations
+  uuid: cpl_validate_inventory_locations
+name: cpl_load_master_inventory_locations
+type: python
+uuid: cpl_load_master_inventory_locations
+widgets: []

@@ -1,0 +1,39 @@
+blocks:
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - cpp_clean_specification_details
+  name: cpp_load_specification_details_sheet
+  status: not_executed
+  type: data_loader
+  upstream_blocks: []
+  uuid: cpp_load_specification_details_sheet
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - cpp_upsert_specification_details
+  name: cpp_clean_specification_details
+  status: not_executed
+  type: transformer
+  upstream_blocks:
+  - cpp_load_specification_details_sheet
+  uuid: cpp_clean_specification_details
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - cpp_validate_specification_details
+  name: cpp_upsert_specification_details
+  status: not_executed
+  type: data_exporter
+  upstream_blocks:
+  - cpp_clean_specification_details
+  uuid: cpp_upsert_specification_details
+- all_upstream_blocks_executed: true
+  downstream_blocks: []
+  name: cpp_validate_specification_details
+  status: not_executed
+  type: custom
+  upstream_blocks:
+  - cpp_upsert_specification_details
+  uuid: cpp_validate_specification_details
+name: cpp_load_master_specification_details
+type: python
+uuid: cpp_load_master_specification_details
+widgets: []

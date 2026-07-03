@@ -1,0 +1,12 @@
+blocks:
+- all_upstream_blocks_executed: true
+  downstream_blocks: []
+  name: run_all
+  status: not_executed
+  type: custom
+  upstream_blocks: []
+  uuid: run_all
+name: run_all
+type: python
+uuid: run_all
+widgets: []

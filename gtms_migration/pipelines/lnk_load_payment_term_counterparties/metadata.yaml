@@ -1,0 +1,39 @@
+blocks:
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - lnk_clean_payment_term_counterparties
+  name: lnk_load_payment_term_counterparties_sheet
+  status: not_executed
+  type: data_loader
+  upstream_blocks: []
+  uuid: lnk_load_payment_term_counterparties_sheet
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - lnk_upsert_payment_term_counterparties
+  name: lnk_clean_payment_term_counterparties
+  status: not_executed
+  type: transformer
+  upstream_blocks:
+  - lnk_load_payment_term_counterparties_sheet
+  uuid: lnk_clean_payment_term_counterparties
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - lnk_validate_payment_term_counterparties
+  name: lnk_upsert_payment_term_counterparties
+  status: not_executed
+  type: data_exporter
+  upstream_blocks:
+  - lnk_clean_payment_term_counterparties
+  uuid: lnk_upsert_payment_term_counterparties
+- all_upstream_blocks_executed: true
+  downstream_blocks: []
+  name: lnk_validate_payment_term_counterparties
+  status: not_executed
+  type: custom
+  upstream_blocks:
+  - lnk_upsert_payment_term_counterparties
+  uuid: lnk_validate_payment_term_counterparties
+name: lnk_load_payment_term_counterparties
+type: python
+uuid: lnk_load_payment_term_counterparties
+widgets: []

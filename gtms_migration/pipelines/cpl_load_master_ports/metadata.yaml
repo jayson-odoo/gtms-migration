@@ -1,0 +1,39 @@
+blocks:
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - cpl_clean_ports
+  name: cpl_load_ports_sheet
+  status: not_executed
+  type: data_loader
+  upstream_blocks: []
+  uuid: cpl_load_ports_sheet
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - cpl_upsert_ports
+  name: cpl_clean_ports
+  status: not_executed
+  type: transformer
+  upstream_blocks:
+  - cpl_load_ports_sheet
+  uuid: cpl_clean_ports
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - cpl_validate_ports
+  name: cpl_upsert_ports
+  status: not_executed
+  type: data_exporter
+  upstream_blocks:
+  - cpl_clean_ports
+  uuid: cpl_upsert_ports
+- all_upstream_blocks_executed: true
+  downstream_blocks: []
+  name: cpl_validate_ports
+  status: not_executed
+  type: custom
+  upstream_blocks:
+  - cpl_upsert_ports
+  uuid: cpl_validate_ports
+name: cpl_load_master_ports
+type: python
+uuid: cpl_load_master_ports
+widgets: []

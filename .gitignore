@@ -1,0 +1,24 @@
+# Secrets
+.env
+secrets/
+*.json
+!**/metadata.json
+gen-lang-client-*.json
+
+# Mage runtime
+**/mage_data/
+**/__pycache__/
+*.pyc
+.preferences.yaml
+
+# OS
+.DS_Store
+
+# Business master data (kept local — not published)
+raw_master/
+recon/*.csv
+recon/**/*.csv
+recon/*.xlsx
+recon/**/*.xlsx
+*.xlsx
+*.log

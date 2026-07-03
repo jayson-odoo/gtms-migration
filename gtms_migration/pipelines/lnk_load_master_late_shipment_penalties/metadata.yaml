@@ -1,0 +1,39 @@
+blocks:
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - lnk_clean_late_shipment_penalties
+  name: lnk_load_late_shipment_penalties_sheet
+  status: not_executed
+  type: data_loader
+  upstream_blocks: []
+  uuid: lnk_load_late_shipment_penalties_sheet
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - lnk_upsert_late_shipment_penalties
+  name: lnk_clean_late_shipment_penalties
+  status: not_executed
+  type: transformer
+  upstream_blocks:
+  - lnk_load_late_shipment_penalties_sheet
+  uuid: lnk_clean_late_shipment_penalties
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - lnk_validate_late_shipment_penalties
+  name: lnk_upsert_late_shipment_penalties
+  status: not_executed
+  type: data_exporter
+  upstream_blocks:
+  - lnk_clean_late_shipment_penalties
+  uuid: lnk_upsert_late_shipment_penalties
+- all_upstream_blocks_executed: true
+  downstream_blocks: []
+  name: lnk_validate_late_shipment_penalties
+  status: not_executed
+  type: custom
+  upstream_blocks:
+  - lnk_upsert_late_shipment_penalties
+  uuid: lnk_validate_late_shipment_penalties
+name: lnk_load_master_late_shipment_penalties
+type: python
+uuid: lnk_load_master_late_shipment_penalties
+widgets: []

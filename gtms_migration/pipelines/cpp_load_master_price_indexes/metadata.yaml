@@ -1,0 +1,39 @@
+blocks:
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - cpp_clean_price_indexes
+  name: cpp_load_price_indexes_sheet
+  status: not_executed
+  type: data_loader
+  upstream_blocks: []
+  uuid: cpp_load_price_indexes_sheet
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - cpp_upsert_price_indexes
+  name: cpp_clean_price_indexes
+  status: not_executed
+  type: transformer
+  upstream_blocks:
+  - cpp_load_price_indexes_sheet
+  uuid: cpp_clean_price_indexes
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - cpp_validate_price_indexes
+  name: cpp_upsert_price_indexes
+  status: not_executed
+  type: data_exporter
+  upstream_blocks:
+  - cpp_clean_price_indexes
+  uuid: cpp_upsert_price_indexes
+- all_upstream_blocks_executed: true
+  downstream_blocks: []
+  name: cpp_validate_price_indexes
+  status: not_executed
+  type: custom
+  upstream_blocks:
+  - cpp_upsert_price_indexes
+  uuid: cpp_validate_price_indexes
+name: cpp_load_master_price_indexes
+type: python
+uuid: cpp_load_master_price_indexes
+widgets: []

@@ -1,0 +1,39 @@
+blocks:
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - le_clean_payment_terms
+  name: le_load_payment_terms_sheet
+  status: not_executed
+  type: data_loader
+  upstream_blocks: []
+  uuid: le_load_payment_terms_sheet
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - le_upsert_payment_terms
+  name: le_clean_payment_terms
+  status: not_executed
+  type: transformer
+  upstream_blocks:
+  - le_load_payment_terms_sheet
+  uuid: le_clean_payment_terms
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - le_validate_payment_terms
+  name: le_upsert_payment_terms
+  status: not_executed
+  type: data_exporter
+  upstream_blocks:
+  - le_clean_payment_terms
+  uuid: le_upsert_payment_terms
+- all_upstream_blocks_executed: true
+  downstream_blocks: []
+  name: le_validate_payment_terms
+  status: not_executed
+  type: custom
+  upstream_blocks:
+  - le_upsert_payment_terms
+  uuid: le_validate_payment_terms
+name: le_load_master_payment_terms
+type: python
+uuid: le_load_master_payment_terms
+widgets: []

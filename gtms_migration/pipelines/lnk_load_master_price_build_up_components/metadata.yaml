@@ -1,0 +1,39 @@
+blocks:
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - lnk_clean_price_build_up_components
+  name: lnk_load_price_build_up_components_sheet
+  status: not_executed
+  type: data_loader
+  upstream_blocks: []
+  uuid: lnk_load_price_build_up_components_sheet
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - lnk_upsert_price_build_up_components
+  name: lnk_clean_price_build_up_components
+  status: not_executed
+  type: transformer
+  upstream_blocks:
+  - lnk_load_price_build_up_components_sheet
+  uuid: lnk_clean_price_build_up_components
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - lnk_validate_price_build_up_components
+  name: lnk_upsert_price_build_up_components
+  status: not_executed
+  type: data_exporter
+  upstream_blocks:
+  - lnk_clean_price_build_up_components
+  uuid: lnk_upsert_price_build_up_components
+- all_upstream_blocks_executed: true
+  downstream_blocks: []
+  name: lnk_validate_price_build_up_components
+  status: not_executed
+  type: custom
+  upstream_blocks:
+  - lnk_upsert_price_build_up_components
+  uuid: lnk_validate_price_build_up_components
+name: lnk_load_master_price_build_up_components
+type: python
+uuid: lnk_load_master_price_build_up_components
+widgets: []

@@ -1,0 +1,39 @@
+blocks:
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - lnk_clean_contract_term_incoterms
+  name: lnk_load_contract_term_incoterms_sheet
+  status: not_executed
+  type: data_loader
+  upstream_blocks: []
+  uuid: lnk_load_contract_term_incoterms_sheet
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - lnk_upsert_contract_term_incoterms
+  name: lnk_clean_contract_term_incoterms
+  status: not_executed
+  type: transformer
+  upstream_blocks:
+  - lnk_load_contract_term_incoterms_sheet
+  uuid: lnk_clean_contract_term_incoterms
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - lnk_validate_contract_term_incoterms
+  name: lnk_upsert_contract_term_incoterms
+  status: not_executed
+  type: data_exporter
+  upstream_blocks:
+  - lnk_clean_contract_term_incoterms
+  uuid: lnk_upsert_contract_term_incoterms
+- all_upstream_blocks_executed: true
+  downstream_blocks: []
+  name: lnk_validate_contract_term_incoterms
+  status: not_executed
+  type: custom
+  upstream_blocks:
+  - lnk_upsert_contract_term_incoterms
+  uuid: lnk_validate_contract_term_incoterms
+name: lnk_load_contract_term_incoterms
+type: python
+uuid: lnk_load_contract_term_incoterms
+widgets: []

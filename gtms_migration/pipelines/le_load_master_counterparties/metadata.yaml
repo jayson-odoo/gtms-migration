@@ -1,0 +1,39 @@
+blocks:
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - le_clean_profit_centers
+  name: le_load_profit_centers_sheet
+  status: not_executed
+  type: data_loader
+  upstream_blocks: []
+  uuid: le_load_profit_centers_sheet
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - le_upsert_profit_centers
+  name: le_clean_profit_centers
+  status: not_executed
+  type: transformer
+  upstream_blocks:
+  - le_load_profit_centers_sheet
+  uuid: le_clean_profit_centers
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - le_validate_profit_centers
+  name: le_upsert_profit_centers
+  status: not_executed
+  type: data_exporter
+  upstream_blocks:
+  - le_clean_profit_centers
+  uuid: le_upsert_profit_centers
+- all_upstream_blocks_executed: true
+  downstream_blocks: []
+  name: le_validate_profit_centers
+  status: not_executed
+  type: custom
+  upstream_blocks:
+  - le_upsert_profit_centers
+  uuid: le_validate_profit_centers
+name: le_load_master_counterparties
+type: python
+uuid: le_load_master_counterparties
+widgets: []

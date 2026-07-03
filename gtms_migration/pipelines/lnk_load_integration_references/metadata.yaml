@@ -1,0 +1,39 @@
+blocks:
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - lnk_clean_integration_references
+  name: lnk_load_integration_references_sheet
+  status: not_executed
+  type: data_loader
+  upstream_blocks: []
+  uuid: lnk_load_integration_references_sheet
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - lnk_upsert_integration_references
+  name: lnk_clean_integration_references
+  status: not_executed
+  type: transformer
+  upstream_blocks:
+  - lnk_load_integration_references_sheet
+  uuid: lnk_clean_integration_references
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - lnk_validate_integration_references
+  name: lnk_upsert_integration_references
+  status: not_executed
+  type: data_exporter
+  upstream_blocks:
+  - lnk_clean_integration_references
+  uuid: lnk_upsert_integration_references
+- all_upstream_blocks_executed: true
+  downstream_blocks: []
+  name: lnk_validate_integration_references
+  status: not_executed
+  type: custom
+  upstream_blocks:
+  - lnk_upsert_integration_references
+  uuid: lnk_validate_integration_references
+name: lnk_load_integration_references
+type: python
+uuid: lnk_load_integration_references
+widgets: []

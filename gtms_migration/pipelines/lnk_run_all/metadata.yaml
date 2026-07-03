@@ -1,0 +1,12 @@
+blocks:
+- all_upstream_blocks_executed: true
+  downstream_blocks: []
+  name: lnk_run_all
+  status: not_executed
+  type: custom
+  upstream_blocks: []
+  uuid: lnk_run_all
+name: lnk_run_all
+type: python
+uuid: lnk_run_all
+widgets: []

@@ -1,0 +1,39 @@
+blocks:
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - cpl_clean_counterparty_groups
+  name: cpl_load_counterparty_groups_sheet
+  status: not_executed
+  type: data_loader
+  upstream_blocks: []
+  uuid: cpl_load_counterparty_groups_sheet
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - cpl_upsert_counterparty_groups
+  name: cpl_clean_counterparty_groups
+  status: not_executed
+  type: transformer
+  upstream_blocks:
+  - cpl_load_counterparty_groups_sheet
+  uuid: cpl_clean_counterparty_groups
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - cpl_validate_counterparty_groups
+  name: cpl_upsert_counterparty_groups
+  status: not_executed
+  type: data_exporter
+  upstream_blocks:
+  - cpl_clean_counterparty_groups
+  uuid: cpl_upsert_counterparty_groups
+- all_upstream_blocks_executed: true
+  downstream_blocks: []
+  name: cpl_validate_counterparty_groups
+  status: not_executed
+  type: custom
+  upstream_blocks:
+  - cpl_upsert_counterparty_groups
+  uuid: cpl_validate_counterparty_groups
+name: cpl_load_master_counterparty_groups
+type: python
+uuid: cpl_load_master_counterparty_groups
+widgets: []

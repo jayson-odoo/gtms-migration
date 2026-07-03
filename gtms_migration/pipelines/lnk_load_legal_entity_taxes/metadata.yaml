@@ -1,0 +1,39 @@
+blocks:
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - lnk_clean_legal_entity_taxes
+  name: lnk_load_legal_entity_taxes_sheet
+  status: not_executed
+  type: data_loader
+  upstream_blocks: []
+  uuid: lnk_load_legal_entity_taxes_sheet
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - lnk_upsert_legal_entity_taxes
+  name: lnk_clean_legal_entity_taxes
+  status: not_executed
+  type: transformer
+  upstream_blocks:
+  - lnk_load_legal_entity_taxes_sheet
+  uuid: lnk_clean_legal_entity_taxes
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - lnk_validate_legal_entity_taxes
+  name: lnk_upsert_legal_entity_taxes
+  status: not_executed
+  type: data_exporter
+  upstream_blocks:
+  - lnk_clean_legal_entity_taxes
+  uuid: lnk_upsert_legal_entity_taxes
+- all_upstream_blocks_executed: true
+  downstream_blocks: []
+  name: lnk_validate_legal_entity_taxes
+  status: not_executed
+  type: custom
+  upstream_blocks:
+  - lnk_upsert_legal_entity_taxes
+  uuid: lnk_validate_legal_entity_taxes
+name: lnk_load_legal_entity_taxes
+type: python
+uuid: lnk_load_legal_entity_taxes
+widgets: []

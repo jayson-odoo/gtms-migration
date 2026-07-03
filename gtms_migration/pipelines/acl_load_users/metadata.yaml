@@ -1,0 +1,39 @@
+blocks:
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - acl_clean_users
+  name: acl_load_users_sheet
+  status: not_executed
+  type: data_loader
+  upstream_blocks: []
+  uuid: acl_load_users_sheet
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - acl_upsert_users
+  name: acl_clean_users
+  status: not_executed
+  type: transformer
+  upstream_blocks:
+  - acl_load_users_sheet
+  uuid: acl_clean_users
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - acl_validate_users
+  name: acl_upsert_users
+  status: not_executed
+  type: data_exporter
+  upstream_blocks:
+  - acl_clean_users
+  uuid: acl_upsert_users
+- all_upstream_blocks_executed: true
+  downstream_blocks: []
+  name: acl_validate_users
+  status: not_executed
+  type: custom
+  upstream_blocks:
+  - acl_upsert_users
+  uuid: acl_validate_users
+name: acl_load_users
+type: python
+uuid: acl_load_users
+widgets: []

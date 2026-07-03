@@ -1,0 +1,39 @@
+blocks:
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - acl_clean_role_permissions
+  name: acl_load_role_permissions_sheet
+  status: not_executed
+  type: data_loader
+  upstream_blocks: []
+  uuid: acl_load_role_permissions_sheet
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - acl_upsert_role_permissions
+  name: acl_clean_role_permissions
+  status: not_executed
+  type: transformer
+  upstream_blocks:
+  - acl_load_role_permissions_sheet
+  uuid: acl_clean_role_permissions
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - acl_validate_role_permissions
+  name: acl_upsert_role_permissions
+  status: not_executed
+  type: data_exporter
+  upstream_blocks:
+  - acl_clean_role_permissions
+  uuid: acl_upsert_role_permissions
+- all_upstream_blocks_executed: true
+  downstream_blocks: []
+  name: acl_validate_role_permissions
+  status: not_executed
+  type: custom
+  upstream_blocks:
+  - acl_upsert_role_permissions
+  uuid: acl_validate_role_permissions
+name: acl_load_role_permissions
+type: python
+uuid: acl_load_role_permissions
+widgets: []

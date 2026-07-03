@@ -1,0 +1,39 @@
+blocks:
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - ac_clean_taxes
+  name: ac_load_taxes_sheet
+  status: not_executed
+  type: data_loader
+  upstream_blocks: []
+  uuid: ac_load_taxes_sheet
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - ac_upsert_taxes
+  name: ac_clean_taxes
+  status: not_executed
+  type: transformer
+  upstream_blocks:
+  - ac_load_taxes_sheet
+  uuid: ac_clean_taxes
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - ac_validate_taxes
+  name: ac_upsert_taxes
+  status: not_executed
+  type: data_exporter
+  upstream_blocks:
+  - ac_clean_taxes
+  uuid: ac_upsert_taxes
+- all_upstream_blocks_executed: true
+  downstream_blocks: []
+  name: ac_validate_taxes
+  status: not_executed
+  type: custom
+  upstream_blocks:
+  - ac_upsert_taxes
+  uuid: ac_validate_taxes
+name: ac_load_master_taxes
+type: python
+uuid: ac_load_master_taxes
+widgets: []

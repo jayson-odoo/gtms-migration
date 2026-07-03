@@ -1,0 +1,39 @@
+blocks:
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - le_clean_business_units
+  name: le_load_business_units_sheet
+  status: not_executed
+  type: data_loader
+  upstream_blocks: []
+  uuid: le_load_business_units_sheet
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - le_upsert_business_units
+  name: le_clean_business_units
+  status: not_executed
+  type: transformer
+  upstream_blocks:
+  - le_load_business_units_sheet
+  uuid: le_clean_business_units
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - le_validate_business_units
+  name: le_upsert_business_units
+  status: not_executed
+  type: data_exporter
+  upstream_blocks:
+  - le_clean_business_units
+  uuid: le_upsert_business_units
+- all_upstream_blocks_executed: true
+  downstream_blocks: []
+  name: le_validate_business_units
+  status: not_executed
+  type: custom
+  upstream_blocks:
+  - le_upsert_business_units
+  uuid: le_validate_business_units
+name: le_load_master_business_units
+type: python
+uuid: le_load_master_business_units
+widgets: []

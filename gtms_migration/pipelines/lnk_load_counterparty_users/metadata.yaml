@@ -1,0 +1,39 @@
+blocks:
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - lnk_clean_counterparty_users
+  name: lnk_load_counterparty_users_sheet
+  status: not_executed
+  type: data_loader
+  upstream_blocks: []
+  uuid: lnk_load_counterparty_users_sheet
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - lnk_upsert_counterparty_users
+  name: lnk_clean_counterparty_users
+  status: not_executed
+  type: transformer
+  upstream_blocks:
+  - lnk_load_counterparty_users_sheet
+  uuid: lnk_clean_counterparty_users
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - lnk_validate_counterparty_users
+  name: lnk_upsert_counterparty_users
+  status: not_executed
+  type: data_exporter
+  upstream_blocks:
+  - lnk_clean_counterparty_users
+  uuid: lnk_upsert_counterparty_users
+- all_upstream_blocks_executed: true
+  downstream_blocks: []
+  name: lnk_validate_counterparty_users
+  status: not_executed
+  type: custom
+  upstream_blocks:
+  - lnk_upsert_counterparty_users
+  uuid: lnk_validate_counterparty_users
+name: lnk_load_counterparty_users
+type: python
+uuid: lnk_load_counterparty_users
+widgets: []

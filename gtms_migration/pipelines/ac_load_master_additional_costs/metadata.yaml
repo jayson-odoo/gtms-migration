@@ -1,0 +1,39 @@
+blocks:
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - ac_clean_additional_costs
+  name: ac_load_additional_costs_sheet
+  status: not_executed
+  type: data_loader
+  upstream_blocks: []
+  uuid: ac_load_additional_costs_sheet
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - ac_upsert_additional_costs
+  name: ac_clean_additional_costs
+  status: not_executed
+  type: transformer
+  upstream_blocks:
+  - ac_load_additional_costs_sheet
+  uuid: ac_clean_additional_costs
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - ac_validate_additional_costs
+  name: ac_upsert_additional_costs
+  status: not_executed
+  type: data_exporter
+  upstream_blocks:
+  - ac_clean_additional_costs
+  uuid: ac_upsert_additional_costs
+- all_upstream_blocks_executed: true
+  downstream_blocks: []
+  name: ac_validate_additional_costs
+  status: not_executed
+  type: custom
+  upstream_blocks:
+  - ac_upsert_additional_costs
+  uuid: ac_validate_additional_costs
+name: ac_load_master_additional_costs
+type: python
+uuid: ac_load_master_additional_costs
+widgets: []

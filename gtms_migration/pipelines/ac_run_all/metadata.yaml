@@ -1,0 +1,12 @@
+blocks:
+- all_upstream_blocks_executed: true
+  downstream_blocks: []
+  name: ac_run_all
+  status: not_executed
+  type: custom
+  upstream_blocks: []
+  uuid: ac_run_all
+name: ac_run_all
+type: python
+uuid: ac_run_all
+widgets: []

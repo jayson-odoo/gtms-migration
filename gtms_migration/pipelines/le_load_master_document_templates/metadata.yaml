@@ -1,0 +1,39 @@
+blocks:
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - le_clean_document_templates
+  name: le_load_document_templates_sheet
+  status: not_executed
+  type: data_loader
+  upstream_blocks: []
+  uuid: le_load_document_templates_sheet
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - le_upsert_document_templates
+  name: le_clean_document_templates
+  status: not_executed
+  type: transformer
+  upstream_blocks:
+  - le_load_document_templates_sheet
+  uuid: le_clean_document_templates
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - le_validate_document_templates
+  name: le_upsert_document_templates
+  status: not_executed
+  type: data_exporter
+  upstream_blocks:
+  - le_clean_document_templates
+  uuid: le_upsert_document_templates
+- all_upstream_blocks_executed: true
+  downstream_blocks: []
+  name: le_validate_document_templates
+  status: not_executed
+  type: custom
+  upstream_blocks:
+  - le_upsert_document_templates
+  uuid: le_validate_document_templates
+name: le_load_master_document_templates
+type: python
+uuid: le_load_master_document_templates
+widgets: []
