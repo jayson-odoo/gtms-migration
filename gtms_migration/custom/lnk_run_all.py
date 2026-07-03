@@ -7,7 +7,6 @@ if 'custom' not in globals():
 PROJECT = 'gtms_migration'
 ORDER = [
     # standalone masters first (referenced by the junctions below)
-    'lnk_load_master_incoterms',
     'lnk_load_master_contract_types',
     'lnk_load_master_contract_terms',
     'lnk_load_master_late_shipment_penalties',

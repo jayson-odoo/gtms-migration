@@ -6,6 +6,7 @@ if 'custom' not in globals():
 
 PROJECT = 'gtms_migration'
 ORDER = [
+    'lnk_load_master_incoterms',
     'cpp_load_master_uoms',
     'cpp_load_master_packing_units',
     'cpp_load_master_specifications',
