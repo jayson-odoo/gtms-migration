@@ -22,6 +22,7 @@ ORDER = [
     'lnk_load_price_index_products',
     'lnk_load_integration_references',
     'lnk_load_inventory_location_packaging_fees',
+    'lnk_load_inventory_location_storage_rates',
     'lnk_load_contract_term_incoterms',
     'lnk_load_contract_term_products',
     'lnk_load_legal_entity_contract_types',

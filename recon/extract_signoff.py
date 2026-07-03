@@ -232,6 +232,10 @@ ENTITIES = [
         ('counterparty_id', 'master_counterparties', 'name', 'profit_center', 'code IS NOT NULL'),
         ('product_id', 'master_products', 'code', 'product'),
     ]),
+    dict(tab='Storage Charges', table='inventory_location_storage_rates', order_by='sequence', fks=[
+        ('inventory_location_id', 'master_inventory_locations', 'code', 'inventory_location'),
+        ('tax_id', 'master_taxes', 'code', 'tax'),
+    ]),
     dict(tab='Product x Contract Type', table='product_contract_types', fks=[
         ('product_id', 'master_products', 'code', 'product'),
         ('contract_type_id', 'master_contract_types', 'code', 'contract_type'),
@@ -347,6 +351,35 @@ def ensure_output_sheet():
     return None
 
 
+def merge_preserved_index(sid, df):
+    """Re-attach any user-added columns on the existing _INDEX tab (e.g. a 'discrepancy'
+    sign-off column) so re-running the extractor never clobbers them. Standard columns
+    (Tab / Source table / Rows) are regenerated; everything else is preserved, matched by Tab."""
+    try:
+        rows = retry(lambda: sheets.spreadsheets().values().get(
+            spreadsheetId=sid, range="'_INDEX'").execute()).get('values', [])
+    except Exception:
+        rows = []
+    if not rows:
+        return df
+    hdr = rows[0]
+    std = {'tab', 'source table', 'source_table', 'rows'}
+    extra_idx = [i for i, h in enumerate(hdr) if str(h).strip().lower() not in std]
+    if not extra_idx:
+        return df
+    preserved = {}
+    for r in rows[1:]:
+        if not r or not str(r[0]).strip():
+            continue
+        preserved[str(r[0]).strip()] = {hdr[i]: (r[i] if i < len(r) else '') for i in extra_idx}
+    df = df.copy()
+    for i in extra_idx:
+        h = hdr[i]
+        df[h] = df['Tab'].map(lambda t: preserved.get(str(t).strip(), {}).get(h, ''))
+    print(f'  _INDEX: preserved user column(s) {[hdr[i] for i in extra_idx]}')
+    return df
+
+
 _existing_tabs = None
 
 
@@ -425,6 +458,8 @@ def main():
     write_xlsx(outputs, out_path)
     if sid:
         for tab, df in outputs:
+            if tab == '_INDEX':
+                df = merge_preserved_index(sid, df)  # keep user's manual columns (e.g. discrepancy)
             write_tab(sid, tab, df)
         print(f'wrote {len(outputs)} tabs -> https://docs.google.com/spreadsheets/d/{sid}')
 

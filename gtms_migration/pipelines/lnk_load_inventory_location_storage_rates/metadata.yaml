@@ -1,0 +1,39 @@
+blocks:
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - lnk_clean_inventory_location_storage_rates
+  name: lnk_load_inventory_location_storage_rates_sheet
+  status: not_executed
+  type: data_loader
+  upstream_blocks: []
+  uuid: lnk_load_inventory_location_storage_rates_sheet
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - lnk_upsert_inventory_location_storage_rates
+  name: lnk_clean_inventory_location_storage_rates
+  status: not_executed
+  type: transformer
+  upstream_blocks:
+  - lnk_load_inventory_location_storage_rates_sheet
+  uuid: lnk_clean_inventory_location_storage_rates
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - lnk_validate_inventory_location_storage_rates
+  name: lnk_upsert_inventory_location_storage_rates
+  status: not_executed
+  type: data_exporter
+  upstream_blocks:
+  - lnk_clean_inventory_location_storage_rates
+  uuid: lnk_upsert_inventory_location_storage_rates
+- all_upstream_blocks_executed: true
+  downstream_blocks: []
+  name: lnk_validate_inventory_location_storage_rates
+  status: not_executed
+  type: custom
+  upstream_blocks:
+  - lnk_upsert_inventory_location_storage_rates
+  uuid: lnk_validate_inventory_location_storage_rates
+name: lnk_load_inventory_location_storage_rates
+type: python
+uuid: lnk_load_inventory_location_storage_rates
+widgets: []
