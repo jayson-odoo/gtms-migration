@@ -1,0 +1,39 @@
+blocks:
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - le_clean_regions
+  name: le_load_regions_sheet
+  status: not_executed
+  type: data_loader
+  upstream_blocks: []
+  uuid: le_load_regions_sheet
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - le_upsert_regions
+  name: le_clean_regions
+  status: not_executed
+  type: transformer
+  upstream_blocks:
+  - le_load_regions_sheet
+  uuid: le_clean_regions
+- all_upstream_blocks_executed: true
+  downstream_blocks:
+  - le_validate_regions
+  name: le_upsert_regions
+  status: not_executed
+  type: data_exporter
+  upstream_blocks:
+  - le_clean_regions
+  uuid: le_upsert_regions
+- all_upstream_blocks_executed: true
+  downstream_blocks: []
+  name: le_validate_regions
+  status: not_executed
+  type: custom
+  upstream_blocks:
+  - le_upsert_regions
+  uuid: le_validate_regions
+name: le_load_master_regions
+type: python
+uuid: le_load_master_regions
+widgets: []

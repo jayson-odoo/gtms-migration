@@ -24,6 +24,14 @@ def transform(df, *args, **kwargs):
     df = df.rename(columns={'additional cost group': 'additional_cost_group_id'})
     df = clean_df(df, cols=COLS, key_cols=['name'], bool_cols=['is_active'],
                   null_cols=NULL, float_cols=['default_value'])
+    # name/description are varchar(128) in master_additional_costs (the GTMS app enforces
+    # the same limit). The sheet has a 132-char outlier; cap to the column limit so the
+    # batch doesn't abort with StringDataRightTruncation, and log anything trimmed.
+    for col in ['name', 'description']:
+        too_long = df[col].notna() & (df[col].astype(str).str.len() > 128)
+        for v in df.loc[too_long, col]:
+            print(f'[master_additional_costs] truncating {col} to 128 chars: {v!r}')
+        df.loc[too_long, col] = df.loc[too_long, col].astype(str).str.slice(0, 128)
     df = resolve_fk(df, 'additional_cost_group_id', 'master_additional_cost_groups', 'name')
     # profit_centers: one OR many names (pipe/semicolon-delimited) -> JSON array of counterparty ids.
     # Scoped to profit centers (code IS NOT NULL) so 'QL INTERNATIONAL PTE. LTD.' can't collide with a cpl row.

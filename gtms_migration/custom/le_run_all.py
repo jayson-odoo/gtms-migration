@@ -17,6 +17,7 @@ PROJECT = 'gtms_migration'
 ORDER = [
     'le_load_master_countries',
     'le_load_master_states',
+    'le_load_master_regions',
     'le_load_addresses',
     'le_load_master_business_units',
     'le_load_master_payment_terms',
